@@ -4,13 +4,11 @@
 ## Inicializar projeto
 
 ``` bash
-# install dependencies
+# Instalar as dependencias
 npm install
 
-# serve with hot reload at localhost:8080
+# Iniciar o projeto
 npm run dev
 
-# build for production with minification
-npm run build
 ```
 
