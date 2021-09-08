@@ -1,20 +1,29 @@
 <template>
-
   <div class="painel">
-    <h2 class="painel-titulo">{{ titulo }}</h2>
-    <slot class="painel-conteudo"></slot>
+    <h2 class="painel-titulo" @dblclick="visivel = !visivel">
+      {{ titulo }}
+    </h2>
+    <transition name="painel-fade">
+      <div class="painel-conteudo" v-show="visivel">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
-
 </template>
 
 <script>
 export default {
-    props:['titulo']
+  props: ["titulo"],
+  data() {
+    return {
+      visivel: true,
+    };
+  },
 };
 </script>
 
-<style scoped>  
-/* scoped especifica que a estilização é apenas para esse componente */ 
+<style scoped>
+/* scoped especifica que a estilização é apenas para esse componente */
 .painel {
   padding: 0 auto;
   border: solid 2px grey;
@@ -22,7 +31,7 @@ export default {
   margin: 5px;
   box-shadow: 5px 5px 10px grey;
   width: 200px;
-  height: 100%;
+  height: auto;
   vertical-align: top;
   text-align: center;
 }
@@ -35,18 +44,6 @@ export default {
   padding: 10px;
   text-transform: uppercase;
 }
-.painel {
-  padding: 0 auto;
-  border: solid 2px grey;
-  display: inline-block;
-  margin: 5px;
-  box-shadow: 5px 5px 10px grey;
-  width: 200px;
-  height: 100%;
-  vertical-align: top;
-  text-align: center;
-}
-
 .painel .painel-titulo {
   text-align: center;
   border: solid 2px;
@@ -56,7 +53,14 @@ export default {
   text-transform: uppercase;
 }
 
-*{
-    box-shadow: 5px 5px 10px black;
+* {
+  box-shadow: 5px 5px 5px black;
+}
+
+.painel-fade-enter, .painel-fade-leave-active {
+  opacity: 0;
+}
+.painel-fade-enter-active, .painel-fade-leave-active{
+  transition: opacity .2s;
 }
 </style>
